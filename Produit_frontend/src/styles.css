@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-vibe-bg text-vibe-text font-sans antialiased selection:bg-vibe-neon-blue selection:text-black;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-vibe-surface/80 backdrop-blur-md border border-vibe-border shadow-glass rounded-2xl;
+  }
+
+  .neon-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-vibe-neon-blue to-vibe-neon-purple;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 bg-gradient-to-r from-vibe-neon-blue to-vibe-neon-purple text-white font-medium rounded-lg 
+    hover:shadow-neon transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 bg-vibe-surface border border-vibe-border text-vibe-text font-medium rounded-lg 
+    hover:border-vibe-neon-blue transition-all duration-300;
+  }
+
+  .btn-danger {
+    @apply px-4 py-2 bg-red-500/10 border border-red-500/50 text-red-500 font-medium rounded-lg 
+    hover:bg-red-500 hover:text-white transition-all duration-300;
+  }
+
+  .input-field {
+    @apply w-full bg-vibe-bg border border-vibe-border rounded-lg px-4 py-2.5 text-white 
+    focus:outline-none focus:border-vibe-neon-blue focus:ring-1 focus:ring-vibe-neon-blue transition-colors;
+  }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out forwards;
+}
