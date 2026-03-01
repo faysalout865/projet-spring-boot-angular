@@ -16,15 +16,19 @@ public class Produit {
     private Double prixProduit;
     private Date dateProduit;
 
+    @jakarta.persistence.Column(name = "product_image_url", length = 5000)
+    private String imageUrl;
+
     public Produit() {
         super();
     }
 
-    public Produit(String nomProduit, Double prixProduit, Date dateProduit) {
+    public Produit(String nomProduit, Double prixProduit, Date dateProduit, String imageUrl) {
         super();
         this.nomProduit = nomProduit;
         this.prixProduit = prixProduit;
         this.dateProduit = dateProduit;
+        this.imageUrl = imageUrl;
     }
 
     public Long getIdProduit() {
@@ -59,9 +63,17 @@ public class Produit {
         this.dateProduit = dateProduit;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     @Override
     public String toString() {
         return "Produit [idProduit=" + idProduit + ", nomProduit=" + nomProduit +
-                ", prixProduit=" + prixProduit + ", dateProduit=" + dateProduit + "]";
+                ", prixProduit=" + prixProduit + ", dateProduit=" + dateProduit + ", imageUrl=" + imageUrl + "]";
     }
 }

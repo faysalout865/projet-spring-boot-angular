@@ -1,0 +1,97 @@
+<div class="space-y-6 animate-in fade-in duration-500 relative z-10">
+  <!-- Stats Header -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Revenue -->
+    <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+      <div class="absolute -right-4 -top-4 w-24 h-24 bg-green-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+      <div class="flex justify-between items-center relative z-10">
+        <div>
+          <p class="text-gray-500 text-sm font-bold uppercase tracking-wider mb-1">Chiffre d'Affaires</p>
+          <h3 class="text-4xl font-black text-gray-800">
+            <span *ngIf="isLoading" class="animate-pulse text-gray-300">...</span>
+            <span *ngIf="!isLoading">{{ ticketStats.totalRevenue | number:'1.2-2' }} <span class="text-xl text-green-600">MAD</span></span>
+          </h3>
+        </div>
+        <div class="w-14 h-14 bg-green-100 rounded-2xl flex flex-col items-center justify-center border border-green-200 text-green-600 shadow-sm">
+          <i class="fas fa-wallet text-2xl"></i>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Tickets -->
+    <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+      <div class="absolute -right-4 -top-4 w-24 h-24 bg-blue-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+      <div class="flex justify-between items-center relative z-10">
+        <div>
+          <p class="text-gray-500 text-sm font-bold uppercase tracking-wider mb-1">Ventes (Tickets)</p>
+          <h3 class="text-4xl font-black text-gray-800">
+            <span *ngIf="isLoading" class="animate-pulse text-gray-300">...</span>
+            <span *ngIf="!isLoading">{{ ticketStats.totalTickets }}</span>
+          </h3>
+        </div>
+        <div class="w-14 h-14 bg-blue-100 rounded-2xl flex flex-col items-center justify-center border border-blue-200 text-blue-600 shadow-sm">
+          <i class="fas fa-receipt text-2xl"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products Count -->
+    <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+      <div class="absolute -right-4 -top-4 w-24 h-24 bg-orange-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+      <div class="flex justify-between items-center relative z-10">
+        <div>
+          <p class="text-gray-500 text-sm font-bold uppercase tracking-wider mb-1">Inventaire Total</p>
+          <h3 class="text-4xl font-black text-gray-800">{{ produits.length }}</h3>
+        </div>
+        <div class="w-14 h-14 bg-orange-100 rounded-2xl flex flex-col items-center justify-center border border-orange-200 text-orange-600 shadow-sm">
+          <i class="fas fa-boxes-stacked text-2xl"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Action -->
+  <div class="flex justify-between items-center py-4 border-b border-gray-200 mt-8 mb-4">
+    <div>
+      <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+        <i class="fas fa-store text-emerald-600"></i> Rayons du Supermarché
+      </h2>
+      <p class="text-gray-500 text-sm">Vue globale des produits disponibles en magasin.</p>
+    </div>
+    <button (click)="exportProducts()" class="bg-white hover:bg-gray-50 text-gray-700 px-5 py-2.5 rounded-xl font-bold shadow-sm border border-gray-300 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+      <i class="fas fa-file-csv text-emerald-600"></i> Export CSV
+    </button>
+  </div>
+
+  <!-- 3D Isometric / Cube Grid View (Light Theme) -->
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 pb-20">
+    <div *ngFor="let p of produits; let i = index" 
+         class="group relative h-56 bg-white border border-gray-200 rounded-2xl transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-emerald-900/10 cursor-pointer"
+         [style.animation-delay]="(i * 50) + 'ms'">
+         
+      <!-- Clean display area -->
+      <div class="w-full h-full flex flex-col p-3 relative overflow-hidden rounded-2xl z-10">
+        
+        <!-- Product Image Container -->
+        <div class="flex-1 w-full bg-gray-50 rounded-xl mb-3 relative flex items-center justify-center overflow-hidden">
+          <img *ngIf="p.imageUrl" [src]="p.imageUrl" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&q=80'" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="{{ p.nomProduit }}">
+          <i *ngIf="!p.imageUrl" class="fas fa-shopping-basket text-4xl text-gray-300 group-hover:text-emerald-400 transition-colors"></i>
+          
+          <!-- Price Tag overlay -->
+          <div class="absolute top-2 right-2 bg-emerald-600 text-white text-xs font-black px-2 py-1 rounded-lg shadow-md transform rotate-3">
+            {{ p.prixProduit }} DH
+          </div>
+        </div>
+        
+        <!-- Text details -->
+        <div class="text-center px-1">
+          <h4 class="text-gray-800 text-sm font-bold truncate" title="{{ p.nomProduit }}">{{ p.nomProduit }}</h4>
+          <p class="text-gray-500 text-xs mt-1">Ref: #{{ p.idProduit }}</p>
+        </div>
+      </div>
+      
+      <!-- Shelf Shadow Effect -->
+      <div class="absolute -bottom-3 inset-x-6 h-3 bg-black/5 blur-md rounded-full transition-opacity opacity-0 group-hover:opacity-100"></div>
+    </div>
+  </div>
+</div>

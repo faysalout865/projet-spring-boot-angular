@@ -5,10 +5,12 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import com.gt.produits.entities.Produit;
 import com.gt.produits.repos.ProduitRepository;
 
 @SpringBootTest // Bach Spring lansi l'context dyal test
+@ActiveProfiles("test")
 class ProduitsApplicationTests {
 
 	@Autowired // Injection dyal repository bach n-khdmo b les méthodes dyalo
@@ -18,7 +20,8 @@ class ProduitsApplicationTests {
 	@Test
 	public void testCreateProduit() {
 		// Kan-creew objet jdid mn Produit
-		Produit prod = new Produit("PC Dell", 2200.500, new Date());
+		Produit prod = new Produit("PC Dell", 2200.500, new Date(),
+				"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1000&auto=format&fit=crop");
 		// Kan-sauvegarder l'objet f database
 		produitRepository.save(prod);
 	}

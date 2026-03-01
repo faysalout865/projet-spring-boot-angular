@@ -1,0 +1,68 @@
+<div class="space-y-6 relative z-10">
+  <!-- Header -->
+  <div class="flex justify-between items-center bg-white border border-gray-200 p-6 rounded-2xl shadow-sm">
+    <div>
+      <h2 class="text-2xl font-bold text-gray-800 mb-1"><i class="fas fa-users text-blue-500 mr-2"></i> Utilisateurs</h2>
+      <p class="text-gray-500 text-sm">Gérez les accès au système POS.</p>
+    </div>
+    <button (click)="openModal()" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl font-bold shadow-md transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+      <i class="fas fa-user-plus"></i> Ajouter Caissier
+    </button>
+  </div>
+
+  <!-- Table -->
+  <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+    <table class="w-full text-left text-sm text-gray-600">
+      <thead class="bg-gray-50 text-gray-500 border-b border-gray-200 text-xs uppercase font-medium tracking-wider">
+        <tr>
+          <th class="px-6 py-4">ID</th>
+          <th class="px-6 py-4">Username</th>
+          <th class="px-6 py-4">Role(s)</th>
+          <th class="px-6 py-4 text-right">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        <tr *ngFor="let u of users" class="hover:bg-blue-50/50 transition-colors text-gray-800">
+          <td class="px-6 py-4">{{ u.id }}</td>
+          <td class="px-6 py-4 font-bold"><i class="fas fa-user-circle text-gray-400 mr-2 text-lg align-middle"></i>{{ u.username }}</td>
+          <td class="px-6 py-4">
+            <span *ngFor="let r of u.roles" class="px-2 py-1 bg-indigo-50 text-indigo-600 border border-indigo-200 rounded text-xs mr-2 font-bold">
+              {{ r?.name?.replace('ROLE_', '') }}
+            </span>
+          </td>
+          <td class="px-6 py-4 text-right">
+            <button (click)="deleteUser(u.id)" class="text-gray-400 hover:text-red-500 transition-colors" [disabled]="u.username === 'admin'">
+              <i class="fas fa-trash text-lg"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div *ngIf="isModalOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/60 backdrop-blur-sm p-4">
+  <div class="bg-white border border-gray-200 w-full max-w-sm rounded-[2rem] p-8 shadow-2xl relative">
+    <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-50 blur-3xl rounded-full"></div>
+    <h3 class="text-2xl font-bold text-gray-800 mb-6 relative z-10">Nouvel Utilisateur</h3>
+    
+    <div class="space-y-4 relative z-10">
+      <div>
+        <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Username</label>
+        <input type="text" [(ngModel)]="newUser.username" class="w-full bg-gray-50 border border-gray-300 text-gray-800 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm">
+      </div>
+      <div>
+        <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Mot de passe</label>
+        <input type="password" [(ngModel)]="newUser.password" class="w-full bg-gray-50 border border-gray-300 text-gray-800 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm">
+      </div>
+      
+      <div class="flex justify-end gap-3 pt-6">
+        <button (click)="closeModal()" class="px-5 py-2.5 text-gray-500 font-bold hover:text-gray-800 transition-colors">Annuler</button>
+        <button (click)="saveUser()" [disabled]="isSubmitting" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold transition-all shadow-md disabled:opacity-50">
+          Créer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

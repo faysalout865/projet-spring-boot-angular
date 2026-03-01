@@ -1,117 +1,107 @@
-# 📦 Produits Management API
+# 🛒 Digital PROJET POS - Point of Sale & E-commerce Platform
 
 ![Java](https://img.shields.io/badge/Java-17-orange?style=flat-square&logo=openjdk)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.3.1-brightgreen?style=flat-square&logo=spring)
+![Angular](https://img.shields.io/badge/Angular-17+-dd0031?style=flat-square&logo=angular)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat-square&logo=tailwind-css)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-blue?style=flat-square&logo=mysql)
 ![Hibernate](https://img.shields.io/badge/Hibernate-ORM-darkgray?style=flat-square)
 
-Une API RESTful développée avec **Spring Boot** pour la gestion de produits. Ce projet permet d'effectuer des opérations CRUD (Créer, Lire, Mettre à jour, Supprimer) sur une base de données **MySQL** via une architecture logicielle propre (Controller, Service, Repository).
+**Digital PROJET POS** est une plateforme complète Full-Stack de point de vente (Caisse Enregistreuse) et d'administration e-commerce spécialisée pour un **supermarché d'électronique**. Ce projet inclut un Back-end robuste en Java/Spring Boot sécurisé aux normes, et un Front-end moderne et performant en Angular 17.
 
 ---
 
-## ✨ Fonctionnalités
+## ✨ Fonctionnalités Principales
 
-- 🛒 **Opérations CRUD complètes** sur l'entité `Produit` (Nom, Prix, Date de création).
-- 🔌 **API RESTful** respectant les bonnes pratiques (GET, POST, PUT, DELETE).
-- 🗄️ **Base de données relationnelle** gérée via Spring Data JPA / Hibernate.
-- 🧪 **Tests automatisés** avec JUnit 5 et Spring Boot Test.
-- 🚀 **Prêt pour le déploiement** avec Maven.
+### 🖥️ Interface Frontend (Point de Vente Angular)
+
+- **POS Interactif** : Une interface de caisse visuelle, fluide, optimisée par de robustes grilles Tailwind.
+- **Panier Réactif** : Les articles scannés se cumulent dynamiquement avec du calcul algorithmique instantané.
+- **Impression Thermique 80mm** : Génération native et purement "HTML Table" (compatible avec toutes imprimantes thermiques du marché) de ticket de caisse en isolant CSS.
+- **Tableau de Bord Admin** : Graphiques, gestionnaires complets des produits et des fiches employés/utilisateurs.
+- **Standalone Angular v17** : Architecture moderne sans les anciens `NGModules`, tirant parti des Interceptors et Router Guards.
+
+### ⚙️ Moteur Backend (API Spring Boot)
+
+- **RESTful API** : Routes segmentées pour l'administration et pour les interfaces clientes `/api/produits`, `/api/users`.
+- **Mécanisme JWT State-less** : L'authentification passe par un `SecurityFilter` interceptant le token décrypté dans le Header des requêtes sans aucune session backend gérée. L'accès est conditionné par des Rôles (ADMIN vs USER).
+- **CRUD Avancé** : Connexion SQL solide avec Spring Data JPA. Gestion des suppressions asynchrones.
+- **Auto-Génération Tests** : Tests d'intégration propulsés par Mockito / JUnit couvrant l'intégrité de la Base de Données.
 
 ---
 
 ## 🛠️ Stack Technique
 
+### Backend
+
 - **Langage :** Java 17
-- **Framework :** Spring Boot
-- **Accès aux données :** Spring Data JPA
-- **Base de données :** MySQL
-- **Outil de build :** Maven
-- **Tests :** JUnit 5 & Mockito
+- **Framework :** Spring Boot 3.3.1
+- **Sécurité :** Spring Security, JWT (io.jsonwebtoken)
+- **Data & ORM :** Spring Data JPA, Hibernate, MySQL Driver 8.0+
+
+### Frontend
+
+- **Framework Core :** Angular 17.0+ (ES Modules, RxJs)
+- **Styling :** Tailwind CSS
+- **Modèle Formulaire :** Reactive Forms Module
 
 ---
 
 ## 🚀 Installation & Lancement Rapide
 
-### 📋 Prérequis
+### 📋 Prérequis Locaux
 
-Avant de commencer, assurez-vous d'avoir installé :
+- [JDK 17+](https://adoptium.net/) pour compiler le code Java.
+- Serveur local [MySQL](https://dev.mysql.com/downloads/mysql/).
+- [Node.js & npm](https://nodejs.org/en) (Version v18 ou v20 recommandées) pour la partie Angular.
 
-- [Java Development Kit (JDK) 17+](https://adoptium.net/)
-- [Maven](https://maven.apache.org/) (optionnel, le wrapper `mvnw` est inclus)
-- [MySQL Server](https://dev.mysql.com/downloads/mysql/)
+### Étape 1 : Démarrer le Backend (Spring Boot)
 
-### 🛠️ Configuration de la Base de Données
+1. Assurez-vous que votre console MySQL est allumée en arrière-plan.
+2. Créez manuellement la base : `CREATE DATABASE spring_DB;`
+3. Vérifiez les mots de passe (root, "", 3306) au sein du fichier :
+   `produits_backend/src/main/resources/application.properties`
+4. Depuis un terminal ouvert à la racine de la branche `/produits_backend` :
 
-1. Démarrez votre serveur MySQL.
-2. Créez une base de données nommée `spring_DB` :
-   ```sql
-   CREATE DATABASE spring_DB;
+   ```bash
+   # Sous Windows
+   .\mvnw spring-boot:run
+
+   # Sous Mac/Linux
+   ./mvnw spring-boot:run
    ```
-3. Modifiez le fichier `src/main/resources/application.properties` si votre mot de passe ou port MySQL est différent :
-   ```properties
-   spring.datasource.url=jdbc:mysql://localhost:3306/spring_DB?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
-   spring.datasource.username=root
-   spring.datasource.password=votre_mot_de_passe
-   spring.jpa.hibernate.ddl-auto=update
+
+   _(L'API s'allume alors sur http://localhost:8080)_
+
+### Étape 2 : Démarrer le Frontend (Angular)
+
+1. Ouvrez un second terminal à la racine `/Produit_frontend/`.
+2. Installez tout l'environnement javascript Node `node_modules` avec :
+   ```bash
+   npm install
    ```
-
-### ▶️ Exécuter l'application
-
-Clonez le projet, naviguez dans le dossier racine, puis lancez la commande Maven suivante :
-
-```bash
-# Sous Windows
-.\mvnw spring-boot:run
-
-# Sous Linux/Mac
-./mvnw spring-boot:run
-```
-
-L'API sera accessible sur `http://localhost:8080`.
+3. Exécutez le développement natif :
+   ```bash
+   npm run start
+   # ou
+   npx ng serve -o
+   ```
+   _(L'application va se compiler un package virtuel et s'ouvrir automatiquement sur le lien Web http://localhost:4200)_
 
 ---
 
-## 📡 Endpoints de l'API
+## 🔐 Identifiants par défaut (Database Initialization)
 
-L'API expose les routes suivantes pour interagir avec les produits :
+Lorsque Spring se lance pour la première fois avec `createDatabaseIfNotExist=true`, le composant de base `DataInitializer.java` injecte de façon sécurisée des rôles et comptes de tests valides :
 
-| Méthode  | Endpoint    | Description                       | Body (Exemple)                                                                                |
-| :------- | :---------- | :-------------------------------- | :-------------------------------------------------------------------------------------------- |
-| `GET`    | `/api/all`  | Récupérer tous les produits       | N/A                                                                                           |
-| `GET`    | `/api/{id}` | Récupérer un produit via son ID   | N/A                                                                                           |
-| `POST`   | `/api`      | Ajouter un nouveau produit        | `{"nomProduit": "PC Dell", "prixProduit": 2200.5, "dateProduit": "2024-02-24"}`               |
-| `PUT`    | `/api`      | Mettre à jour un produit existant | `{"idProduit": 1, "nomProduit": "PC HP", "prixProduit": 1900.0, "dateProduit": "2024-02-24"}` |
-| `DELETE` | `/api/{id}` | Supprimer un produit via son ID   | N/A                                                                                           |
+- **Administrateur** : `awtyfysl@gmail.com` / `admin` (Peut gérer les comptes et la caisse)
+- **Caissier Standard** : `caissier@market.com` / `12345` (Accès POS exclusif)
 
----
+## 📁 Architecture des dossiers
 
-## 🧪 Exécuter les Tests
-
-Le projet inclut une suite de tests unitaires et d'intégration pour garantir la fiabilité des opérations CRUD.
-
-Pour lancer tous les tests :
-
-```bash
-# Sous Windows
-.\mvnw clean test
-
-# Sous Linux/Mac
-./mvnw clean test
-```
+- `/produits_backend/` → Dossier du serveur Serveur Spring Boot `pom.xml`, Logique JPA `Entities` et Services sécurisés de chiffrement (Bcrypt).
+- `/Produit_frontend/` → Single Page Application sous configuration `angular.json`, contenant dans `/src/app/` les services `Rxjs`, et interfaces modulées via Tailwind dans les dossiers `components/`.
 
 ---
 
-## 📁 Structure du Projet
-
-```text
-src/main/java/com/gt/produits/
-├── entities/           # Modèles de la base de données (Ex: Produit)
-├── repos/              # Interfaces Spring Data JPA pour l'accès aux données
-├── service/            # Logique métier et interfaces de service
-├── restcontrollers/    # Contrôleurs exposant l'API REST
-└── ProduitsApplication # Point d'entrée principal de l'application Spring Boot
-```
-
----
-
-_Fait avec ❤️ avec Spring Boot._
+_Développé pour la plateforme Digital PROJET POS_

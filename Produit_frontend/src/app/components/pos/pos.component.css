@@ -1,0 +1,27 @@
+/* Print strict rules to format the webpage as a 80mm POS receipt */
+
+@media print {
+  @page {
+    margin: 0;
+    size: 80mm auto; /* Standard Thermal Receipt Width */
+  }
+
+  body {
+    background: white;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Force ticket-container behavior during print */
+  .ticket-container {
+    display: block !important;
+    position: static !important;
+    width: 80mm !important;
+    max-width: 80mm !important;
+    margin: 0 auto !important;
+    padding: 3mm !important;
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+}
