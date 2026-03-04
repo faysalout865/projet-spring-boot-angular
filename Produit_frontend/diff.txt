@@ -1,0 +1,551 @@
+﻿diff --git a/Produit_frontend/src/app/components/admin/admin-layout/admin-layout.component.html b/Produit_frontend/src/app/components/admin/admin-layout/admin-layout.component.html
+index dc097ca..1775294 100644
+--- a/Produit_frontend/src/app/components/admin/admin-layout/admin-layout.component.html
++++ b/Produit_frontend/src/app/components/admin/admin-layout/admin-layout.component.html
+@@ -1,10 +1,10 @@
+ <div class="min-h-screen bg-gray-50 flex">
+   <!-- Sidebar -->
+   <aside class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col shadow-sm">
+-    <div class="h-20 flex items-center justify-center px-4 border-b border-gray-200 bg-emerald-600 shadow-inner">
++    <div class="h-20 flex items-center justify-center px-4 border-b border-gray-200 bg-blue-600 shadow-inner">
+       <div class="w-12 h-12 flex items-center justify-center mr-2">
+         <svg viewBox="0 0 120 100" class="w-full h-full">
+-          <!-- Adjusted colors to be visible on white bg if needed, but here bg is emerald-600 -->
++          <!-- Adjusted colors to be visible on white bg if needed, but here bg is blue-600 -->
+           <!-- We use white and yellow so it pops on the dark green background -->
+           <path d="M20,20 L30,20 L40,65 C41,70 45,72 50,72 L85,72 C90,72 93,68 95,60 L105,30 Z" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+           <circle cx="50" cy="85" r="6" fill="#ffffff"/>
+@@ -22,15 +22,15 @@
+       </span>
+     </div>
+     <nav class="flex-1 p-4 space-y-2 relative z-10">
+-      <a routerLink="/admin/dashboard" routerLinkActive="bg-emerald-50 text-emerald-700 border-emerald-500 shadow-[inset_4px_0_0_rgba(16,185,129,1)]" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-emerald-700 rounded-lg transition-all duration-300 border-l-4 border-transparent font-medium tracking-wide">
++      <a routerLink="/admin/dashboard" routerLinkActive="bg-blue-50 text-emerald-700 border-blue-500 shadow-[inset_4px_0_0_rgba(16,185,129,1)]" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-emerald-700 rounded-lg transition-all duration-300 border-l-4 border-transparent font-medium tracking-wide">
+         <i class="fas fa-chart-pie w-5 h-5 mr-3 text-lg"></i>
+         Tableau de Bord
+       </a>
+-      <a routerLink="/admin/inventory" routerLinkActive="bg-emerald-50 text-emerald-700 border-emerald-500 shadow-[inset_4px_0_0_rgba(16,185,129,1)]" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-emerald-700 rounded-lg transition-all duration-300 border-l-4 border-transparent font-medium tracking-wide">
++      <a routerLink="/admin/inventory" routerLinkActive="bg-blue-50 text-emerald-700 border-blue-500 shadow-[inset_4px_0_0_rgba(16,185,129,1)]" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-emerald-700 rounded-lg transition-all duration-300 border-l-4 border-transparent font-medium tracking-wide">
+         <i class="fas fa-boxes-stacked w-5 h-5 mr-3 text-lg"></i>
+         Inventaire
+       </a>
+-      <a routerLink="/admin/users" routerLinkActive="bg-emerald-50 text-emerald-700 border-emerald-500 shadow-[inset_4px_0_0_rgba(16,185,129,1)]" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-emerald-700 rounded-lg transition-all duration-300 border-l-4 border-transparent font-medium tracking-wide">
++      <a routerLink="/admin/users" routerLinkActive="bg-blue-50 text-emerald-700 border-blue-500 shadow-[inset_4px_0_0_rgba(16,185,129,1)]" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 hover:text-emerald-700 rounded-lg transition-all duration-300 border-l-4 border-transparent font-medium tracking-wide">
+         <i class="fas fa-users w-5 h-5 mr-3 text-lg"></i>
+         Utilisateurs
+       </a>
+@@ -44,7 +44,7 @@
+     <div class="p-4 border-t border-gray-200">
+       <button (click)="logout()" class="flex items-center w-full px-4 py-2 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors">
+         <i class="fas fa-sign-out-alt w-5 h-5 mr-3"></i>
+-        D├⌐connexion
++        D├â┬⌐connexion
+       </button>
+     </div>
+   </aside>
+@@ -61,7 +61,7 @@
+           <p class="text-sm font-bold text-gray-800">Admin Store</p>
+           <p class="text-xs text-gray-500">Superviseur</p>
+         </div>
+-        <img src="https://ui-avatars.com/api/?name=Admin+Store&background=10b981&color=fff&size=128&rounded=true&bold=true" alt="Admin" class="w-10 h-10 rounded-full border-2 border-emerald-500 shadow-sm hover:scale-105 transition-transform cursor-pointer">
++        <img src="https://ui-avatars.com/api/?name=Admin+Store&background=10b981&color=fff&size=128&rounded=true&bold=true" alt="Admin" class="w-10 h-10 rounded-full border-2 border-blue-500 shadow-sm hover:scale-105 transition-transform cursor-pointer">
+       </div>
+     </header>
+     
+@@ -78,3 +78,4 @@
+     </div>
+   </main>
+ </div>
++
+diff --git a/Produit_frontend/src/app/components/admin/dashboard/dashboard.component.html b/Produit_frontend/src/app/components/admin/dashboard/dashboard.component.html
+index 7ca28ed..db1a0e6 100644
+--- a/Produit_frontend/src/app/components/admin/dashboard/dashboard.component.html
++++ b/Produit_frontend/src/app/components/admin/dashboard/dashboard.component.html
+@@ -3,16 +3,16 @@
+   <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+     <!-- Revenue -->
+     <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+-      <div class="absolute -right-4 -top-4 w-24 h-24 bg-green-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
++      <div class="absolute -right-4 -top-4 w-24 h-24 bg-cyan-50 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+       <div class="flex justify-between items-center relative z-10">
+         <div>
+           <p class="text-gray-500 text-sm font-bold uppercase tracking-wider mb-1">Chiffre d'Affaires</p>
+           <h3 class="text-4xl font-black text-gray-800">
+             <span *ngIf="isLoading" class="animate-pulse text-gray-300">...</span>
+-            <span *ngIf="!isLoading">{{ ticketStats.totalRevenue | number:'1.2-2' }} <span class="text-xl text-green-600">MAD</span></span>
++            <span *ngIf="!isLoading">{{ ticketStats.totalRevenue | number:'1.2-2' }} <span class="text-xl text-cyan-600">MAD</span></span>
+           </h3>
+         </div>
+-        <div class="w-14 h-14 bg-green-100 rounded-2xl flex flex-col items-center justify-center border border-green-200 text-green-600 shadow-sm">
++        <div class="w-14 h-14 bg-cyan-100 rounded-2xl flex flex-col items-center justify-center border border-green-200 text-cyan-600 shadow-sm">
+           <i class="fas fa-wallet text-2xl"></i>
+         </div>
+       </div>
+@@ -54,12 +54,12 @@
+   <div class="flex justify-between items-center py-4 border-b border-gray-200 mt-8 mb-4">
+     <div>
+       <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+-        <i class="fas fa-store text-emerald-600"></i> Rayons du Supermarch├⌐
++        <i class="fas fa-store text-blue-600"></i> Rayons du Supermarch├â┬⌐
+       </h2>
+       <p class="text-gray-500 text-sm">Vue globale des produits disponibles en magasin.</p>
+     </div>
+     <button (click)="exportProducts()" class="bg-white hover:bg-gray-50 text-gray-700 px-5 py-2.5 rounded-xl font-bold shadow-sm border border-gray-300 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+-      <i class="fas fa-file-csv text-emerald-600"></i> Export CSV
++      <i class="fas fa-file-csv text-blue-600"></i> Export CSV
+     </button>
+   </div>
+ 
+@@ -75,10 +75,10 @@
+         <!-- Product Image Container -->
+         <div class="flex-1 w-full bg-gray-50 rounded-xl mb-3 relative flex items-center justify-center overflow-hidden">
+           <img *ngIf="p.imageUrl" [src]="p.imageUrl" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&q=80'" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="{{ p.nomProduit }}">
+-          <i *ngIf="!p.imageUrl" class="fas fa-shopping-basket text-4xl text-gray-300 group-hover:text-emerald-400 transition-colors"></i>
++          <i *ngIf="!p.imageUrl" class="fas fa-shopping-basket text-4xl text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
+           
+           <!-- Price Tag overlay -->
+-          <div class="absolute top-2 right-2 bg-emerald-600 text-white text-xs font-black px-2 py-1 rounded-lg shadow-md transform rotate-3">
++          <div class="absolute top-2 right-2 bg-blue-600 text-white text-xs font-black px-2 py-1 rounded-lg shadow-md transform rotate-3">
+             {{ p.prixProduit }} DH
+           </div>
+         </div>
+@@ -95,3 +95,4 @@
+     </div>
+   </div>
+ </div>
++
+diff --git a/Produit_frontend/src/app/components/admin/inventory/inventory.component.html b/Produit_frontend/src/app/components/admin/inventory/inventory.component.html
+index 8fe62dc..bd7c0d2 100644
+--- a/Produit_frontend/src/app/components/admin/inventory/inventory.component.html
++++ b/Produit_frontend/src/app/components/admin/inventory/inventory.component.html
+@@ -1,21 +1,21 @@
+ <div class="space-y-6 animate-in fade-in duration-500 relative z-10">
+   <!-- Header & Search -->
+   <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white border border-gray-200 p-6 rounded-2xl shadow-sm relative overflow-hidden">
+-    <div class="absolute -right-10 -top-10 w-48 h-48 bg-emerald-50 blur-3xl rounded-full"></div>
++    <div class="absolute -right-10 -top-10 w-48 h-48 bg-blue-50 blur-3xl rounded-full"></div>
+     <div class="relative z-10">
+       <h2 class="text-2xl font-black text-gray-800 mb-1 tracking-wider uppercase">
+-        <i class="fas fa-boxes-stacked text-emerald-600 mr-2"></i>
+-        Bases De Donn├⌐es
++        <i class="fas fa-boxes-stacked text-blue-600 mr-2"></i>
++        Bases De Donn├â┬⌐es
+       </h2>
+-      <p class="text-gray-500 text-xs font-bold uppercase tracking-widest">G├⌐rez vos produits et prix</p>
++      <p class="text-gray-500 text-xs font-bold uppercase tracking-widest">G├â┬⌐rez vos produits et prix</p>
+     </div>
+     <div class="flex gap-4 relative z-10 w-full sm:w-auto">
+       <div class="relative flex-grow sm:flex-grow-0 sm:w-80">
+         <i class="fas fa-search absolute left-4 top-3.5 text-gray-400"></i>
+         <input type="text" [(ngModel)]="searchTerm" (input)="filter()" placeholder="Rechercher produits..." 
+-               class="w-full bg-gray-50 border border-gray-300 text-gray-800 px-4 py-3 pl-12 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 focus:outline-none transition-all shadow-inner">
++               class="w-full bg-gray-50 border border-gray-300 text-gray-800 px-4 py-3 pl-12 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none transition-all shadow-inner">
+       </div>
+-      <button (click)="openModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-3 rounded-xl font-black text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 flex items-center gap-2 whitespace-nowrap">
++      <button (click)="openModal()" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-black text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 flex items-center gap-2 whitespace-nowrap">
+         <i class="fas fa-plus"></i> Nouveau
+       </button>
+     </div>
+@@ -40,7 +40,7 @@
+             </div>
+             <span class="font-bold text-gray-800 tracking-wide">{{ p.nomProduit }}</span>
+           </td>
+-          <td class="px-6 py-4 font-black text-emerald-600">{{ p.prixProduit | number:'1.2-2' }} DH</td>
++          <td class="px-6 py-4 font-black text-blue-600">{{ p.prixProduit | number:'1.2-2' }} DH</td>
+           <td class="px-6 py-4 text-gray-500 font-medium">{{ p.dateProduit | date:'mediumDate' }}</td>
+           <td class="px-6 py-4 text-right">
+             <button (click)="openModal(p)" class="w-9 h-9 rounded-lg bg-gray-100 text-gray-500 hover:text-blue-600 hover:bg-blue-100 mx-1 transition-all border border-transparent shadow-sm"><i class="fas fa-edit"></i></button>
+@@ -62,7 +62,7 @@
+         <img *ngIf="editingProduit.imageUrl" [src]="editingProduit.imageUrl" class="w-full h-full object-cover" alt="Preview" onerror="this.style.display='none'">
+         <div *ngIf="!editingProduit.imageUrl" class="text-gray-400 text-center text-sm p-4">
+           <svg class="w-8 h-8 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+-          Aper├ºu
++          Aper├â┬ºu
+         </div>
+       </div>
+     </div>
+@@ -73,29 +73,30 @@
+       
+       <div>
+         <label class="block text-sm font-medium text-gray-600 mb-1">Nom du Produit</label>
+-        <input type="text" [(ngModel)]="editingProduit.nomProduit" class="w-full bg-white border border-gray-300 text-gray-800 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:outline-none shadow-sm">
++        <input type="text" [(ngModel)]="editingProduit.nomProduit" class="w-full bg-white border border-gray-300 text-gray-800 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm">
+       </div>
+       
+       <div class="grid grid-cols-2 gap-4">
+         <div>
+           <label class="block text-sm font-medium text-gray-600 mb-1">Prix (DH)</label>
+-          <input type="number" [(ngModel)]="editingProduit.prixProduit" class="w-full bg-white border border-gray-300 text-gray-800 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:outline-none shadow-sm">
++          <input type="number" [(ngModel)]="editingProduit.prixProduit" class="w-full bg-white border border-gray-300 text-gray-800 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm">
+         </div>
+         <div>
+           <label class="block text-sm font-medium text-gray-600 mb-1">Date</label>
+-          <input type="date" [ngModel]="editingProduit.dateProduit | date:'yyyy-MM-dd'" (ngModelChange)="editingProduit.dateProduit = $event" class="w-full bg-white border border-gray-300 text-gray-800 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:outline-none shadow-sm">
++          <input type="date" [ngModel]="editingProduit.dateProduit | date:'yyyy-MM-dd'" (ngModelChange)="editingProduit.dateProduit = $event" class="w-full bg-white border border-gray-300 text-gray-800 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm">
+         </div>
+       </div>
+ 
+       <div>
+         <label class="block text-sm font-medium text-gray-600 mb-1">URL de l'image</label>
+-        <input type="text" [(ngModel)]="editingProduit.imageUrl" placeholder="https://..." class="w-full bg-white border border-gray-300 text-blue-600 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:outline-none shadow-sm">
++        <input type="text" [(ngModel)]="editingProduit.imageUrl" placeholder="https://..." class="w-full bg-white border border-gray-300 text-blue-600 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm">
+       </div>
+ 
+       <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200 mt-6">
+         <button (click)="closeModal()" class="px-4 py-2 text-gray-500 hover:text-gray-800 transition-colors font-medium">Annuler</button>
+-        <button (click)="saveProduit()" class="px-6 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-bold transition-transform transform hover:-translate-y-0.5 shadow-md">Enregistrer</button>
++        <button (click)="saveProduit()" class="px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-bold transition-transform transform hover:-translate-y-0.5 shadow-md">Enregistrer</button>
+       </div>
+     </div>
+   </div>
+ </div>
++
+diff --git a/Produit_frontend/src/app/components/login/login.component.html b/Produit_frontend/src/app/components/login/login.component.html
+index de504fd..a594250 100644
+--- a/Produit_frontend/src/app/components/login/login.component.html
++++ b/Produit_frontend/src/app/components/login/login.component.html
+@@ -5,24 +5,24 @@
+ 
+   <div class="relative w-full max-w-md p-8 m-4 rounded-3xl bg-white/95 backdrop-blur-xl border border-white shadow-[0_15px_40px_rgba(0,0,0,0.1)] overflow-hidden">
+     <!-- Decorative accent -->
+-    <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-400 via-emerald-600 to-green-500 shadow-md"></div>
++    <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-cyan-400 via-blue-600 to-cyan-500 shadow-md"></div>
+ 
+     <div class="text-center mb-8 flex flex-col items-center mt-2">
+       <div class="w-24 h-24 mb-2 flex items-center justify-center">
+         <svg viewBox="0 0 120 100" class="w-full h-full drop-shadow-sm">
+-          <path d="M20,20 L30,20 L40,65 C41,70 45,72 50,72 L85,72 C90,72 93,68 95,60 L105,30 Z" fill="none" stroke="#059669" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+-          <circle cx="50" cy="85" r="6" fill="#059669"/>
+-          <circle cx="80" cy="85" r="6" fill="#059669"/>
+-          <path d="M30,80 L15,80 M25,86 L10,86 M32,92 L20,92" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round"/>
++          <path d="M20,20 L30,20 L40,65 C41,70 45,72 50,72 L85,72 C90,72 93,68 95,60 L105,30 Z" fill="none" stroke="#2563eb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
++          <circle cx="50" cy="85" r="6" fill="#2563eb"/>
++          <circle cx="80" cy="85" r="6" fill="#2563eb"/>
++          <path d="M30,80 L15,80 M25,86 L10,86 M32,92 L20,92" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/>
+           <rect x="58" y="45" width="28" height="15" rx="3" fill="none" stroke="#1f2937" stroke-width="2"/>
+           <line x1="58" y1="49" x2="86" y2="49" stroke="#1f2937" stroke-width="2"/>
+           <line x1="62" y1="54" x2="75" y2="54" stroke="#1f2937" stroke-width="1.5"/>
+           <path d="M48,50 L58,62 L80,25" fill="none" stroke="#f59e0b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+-          <path d="M82,20 A10,10 0 0,1 92,10 M88,25 A18,18 0 0,1 105,8 M94,30 A26,26 0 0,1 118,6" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round"/>
++          <path d="M82,20 A10,10 0 0,1 92,10 M88,25 A18,18 0 0,1 105,8 M94,30 A26,26 0 0,1 118,6" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round"/>
+         </svg>
+       </div>
+-      <h1 class="text-3xl font-black tracking-widest text-gray-800 uppercase">MARKET<span class="text-emerald-600">POS</span></h1>
+-      <p class="text-gray-500 mt-2 text-xs font-bold uppercase tracking-widest">Connectez-vous ├á la caisse</p>
++      <h1 class="text-3xl font-black tracking-widest text-gray-800 uppercase">MARKET<span class="text-blue-600">POS</span></h1>
++      <p class="text-gray-500 mt-2 text-xs font-bold uppercase tracking-widest">Connectez-vous┬áa la caisse</p>
+     </div>
+ 
+     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
+@@ -34,19 +34,19 @@
+       <div>
+         <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Nom d'utilisateur</label>
+         <input type="text" formControlName="username" 
+-               class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all shadow-inner"
++               class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all shadow-inner"
+                placeholder="username">
+       </div>
+ 
+       <div>
+         <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Mot de passe</label>
+         <input type="password" formControlName="password"
+-               class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all shadow-inner"
+-               placeholder="ΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇó">
++               class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all shadow-inner"
++               placeholder="**********">
+       </div>
+ 
+       <button type="submit" [disabled]="loginForm.invalid || isLoading"
+-              class="w-full py-4 px-4 mt-4 flex items-center justify-center rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black tracking-widest uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1 shadow-lg shadow-emerald-600/30">
++              class="w-full py-4 px-4 mt-4 flex items-center justify-center rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black tracking-widest uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1 shadow-lg shadow-blue-600/30">
+         <i *ngIf="!isLoading" class="fas fa-sign-in-alt mr-2 hover:translate-x-1 transition-transform"></i>
+         <i *ngIf="isLoading" class="fas fa-circle-notch fa-spin mr-2"></i>
+         {{ isLoading ? 'Connexion en cours...' : 'Ouvrir la caisse' }}
+@@ -54,3 +54,4 @@
+     </form>
+   </div>
+ </div>
++
+diff --git a/Produit_frontend/src/app/components/pos/pos.component.html b/Produit_frontend/src/app/components/pos/pos.component.html
+index 950bdbd..7bcef1c 100644
+--- a/Produit_frontend/src/app/components/pos/pos.component.html
++++ b/Produit_frontend/src/app/components/pos/pos.component.html
+@@ -14,20 +14,20 @@
+       <div class="flex items-center gap-4">
+         <div class="w-14 h-14 flex items-center justify-center">
+           <svg viewBox="0 0 120 100" class="w-full h-full">
+-            <path d="M20,20 L30,20 L40,65 C41,70 45,72 50,72 L85,72 C90,72 93,68 95,60 L105,30 Z" fill="none" stroke="#059669" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+-            <circle cx="50" cy="85" r="6" fill="#059669"/>
+-            <circle cx="80" cy="85" r="6" fill="#059669"/>
+-            <path d="M30,80 L15,80 M25,86 L10,86 M32,92 L20,92" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round"/>
++            <path d="M20,20 L30,20 L40,65 C41,70 45,72 50,72 L85,72 C90,72 93,68 95,60 L105,30 Z" fill="none" stroke="#2563eb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
++            <circle cx="50" cy="85" r="6" fill="#2563eb"/>
++            <circle cx="80" cy="85" r="6" fill="#2563eb"/>
++            <path d="M30,80 L15,80 M25,86 L10,86 M32,92 L20,92" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/>
+             <rect x="58" y="45" width="28" height="15" rx="3" fill="none" stroke="#1f2937" stroke-width="2"/>
+             <line x1="58" y1="49" x2="86" y2="49" stroke="#1f2937" stroke-width="2"/>
+             <line x1="62" y1="54" x2="75" y2="54" stroke="#1f2937" stroke-width="1.5"/>
+             <path d="M48,50 L58,62 L80,25" fill="none" stroke="#f59e0b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+-            <path d="M82,20 A10,10 0 0,1 92,10 M88,25 A18,18 0 0,1 105,8 M94,30 A26,26 0 0,1 118,6" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round"/>
++            <path d="M82,20 A10,10 0 0,1 92,10 M88,25 A18,18 0 0,1 105,8 M94,30 A26,26 0 0,1 118,6" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round"/>
+           </svg>
+         </div>
+         <div>
+           <h1 class="text-2xl font-black tracking-widest text-gray-800 uppercase flex items-center">
+-            MARKET<span class="text-emerald-600">POS</span>
++            MARKET<span class="text-blue-600">POS</span>
+           </h1>
+           <p class="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Caisse Enregistreuse</p>
+         </div>
+@@ -37,7 +37,7 @@
+           <i class="fas fa-arrow-left mr-2"></i>Dashboard
+         </a>
+         <button (click)="logout()" class="px-5 py-2.5 rounded-xl border border-red-200 bg-red-50 text-red-600 hover:bg-red-500 hover:text-white font-bold transition-all shadow-sm">
+-          <i class="fas fa-sign-out-alt mr-2"></i>D├⌐connexion
++          <i class="fas fa-sign-out-alt mr-2"></i>Deconnexion
+         </button>
+       </div>
+     </header>
+@@ -49,10 +49,10 @@
+          
+         <div class="w-full h-40 relative bg-gray-50 flex items-center justify-center p-2">
+           <img *ngIf="p.imageUrl" [src]="p.imageUrl" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&q=80'" alt="Product" class="w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-700">
+-          <i *ngIf="!p.imageUrl" class="fas fa-laptop text-6xl text-gray-300 group-hover:text-emerald-400 transition-colors"></i>
++          <i *ngIf="!p.imageUrl" class="fas fa-laptop text-6xl text-gray-300 group-hover:text-cyan-400 transition-colors"></i>
+           
+           <!-- Price Badge -->
+-          <div class="absolute top-2 right-2 bg-emerald-600 text-white font-black px-3 py-1 rounded-lg z-20 shadow-md">
++          <div class="absolute top-2 right-2 bg-blue-600 text-white font-black px-3 py-1 rounded-lg z-20 shadow-md">
+             {{ p.prixProduit | number:'1.2-2' }} <span class="text-[0.65rem] font-bold">DH</span>
+           </div>
+         </div>
+@@ -62,7 +62,7 @@
+           <p class="text-xs text-gray-500 mt-1">Ref: #{{ p.idProduit }}</p>
+           
+           <!-- Add Indicator Overlay -->
+-          <div class="absolute inset-0 bg-emerald-600/90 hidden group-hover:flex flex-col items-center justify-center text-white transition-all backdrop-blur-sm shadow-inner">
++          <div class="absolute inset-0 bg-blue-600/90 hidden group-hover:flex flex-col items-center justify-center text-white transition-all backdrop-blur-sm shadow-inner">
+              <i class="fas fa-cart-plus text-3xl mb-2 animate-bounce"></i>
+              <span class="text-sm font-black tracking-wider uppercase">Ajouter</span>
+           </div>
+@@ -74,7 +74,7 @@
+ 
+   <!-- Right sidebar: Interactive Cart -->
+   <aside class="w-1/3 min-w-[320px] max-w-[450px] bg-white border-l border-gray-200 flex flex-col shadow-2xl z-20">
+-    <div class="p-6 border-b border-gray-100 flex-shrink-0 bg-emerald-600 text-white">
++    <div class="p-6 border-b border-gray-100 flex-shrink-0 bg-blue-600 text-white">
+       <h2 class="text-xl font-black flex items-center tracking-wider uppercase">
+         <i class="fas fa-shopping-cart mr-3"></i>
+         Panier Actuel
+@@ -90,17 +90,17 @@
+         <p class="font-bold tracking-widest uppercase text-sm">Panier Vide</p>
+       </div>
+ 
+-      <div *ngFor="let item of cart" class="flex items-center justify-between p-3 bg-white rounded-xl border border-gray-200 hover:border-emerald-300 transition-colors group shadow-sm">
++      <div *ngFor="let item of cart" class="flex items-center justify-between p-3 bg-white rounded-xl border border-gray-200 hover:border-blue-300 transition-colors group shadow-sm">
+         <div class="flex-1">
+           <p class="font-bold text-sm text-gray-700 line-clamp-1 group-hover:text-emerald-700 transition-colors">{{ item.nomProduit }}</p>
+-          <p class="text-xs font-black text-emerald-600 mt-1">{{ item.prixProduit | number:'1.2-2' }} DH</p>
++          <p class="text-xs font-black text-blue-600 mt-1">{{ item.prixProduit | number:'1.2-2' }} DH</p>
+         </div>
+         <div class="flex items-center space-x-2 bg-gray-50 rounded-lg p-1 ml-4 border border-gray-200">
+           <button (click)="updateQuantity(item, -1)" class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-all">
+             <i [ngClass]="item.quantity === 1 ? 'fas fa-trash text-xs' : 'fas fa-minus text-xs'"></i>
+           </button>
+           <span class="w-6 text-center text-sm font-black text-gray-800">{{ item.quantity }}</span>
+-          <button (click)="updateQuantity(item, 1)" class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-md transition-all">
++          <button (click)="updateQuantity(item, 1)" class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-all">
+             <i class="fas fa-plus text-xs"></i>
+           </button>
+         </div>
+@@ -118,10 +118,10 @@
+         <div class="h-px w-full bg-gray-200 my-2"></div>
+         <div class="flex justify-between text-gray-800 text-2xl font-black">
+           <span>Total</span>
+-          <span class="text-emerald-600">{{ getTotal() | number:'1.2-2' }} DH</span>
++          <span class="text-blue-600">{{ getTotal() | number:'1.2-2' }} DH</span>
+         </div>
+       </div>
+-      <button [disabled]="cart.length === 0" (click)="printReceipt()" class="w-full py-4 rounded-xl text-white relative group overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed bg-emerald-600 hover:bg-emerald-500 transition-all shadow-[0_10px_20px_rgba(16,185,129,0.3)]">
++      <button [disabled]="cart.length === 0" (click)="printReceipt()" class="w-full py-4 rounded-xl text-white relative group overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed bg-blue-600 hover:bg-blue-500 transition-all shadow-[0_10px_20px_rgba(16,185,129,0.3)]">
+         <div class="relative z-10 flex items-center justify-center gap-2 font-black text-lg tracking-widest">
+           <i class="fas fa-print"></i> ENCAISSER & IMPRIMER
+         </div>
+@@ -217,3 +217,4 @@
+ 
+ </div>
+ 
++
+diff --git a/Produit_frontend/src/styles.css b/Produit_frontend/src/styles.css
+index 81a1e2f..2b86036 100644
+--- a/Produit_frontend/src/styles.css
++++ b/Produit_frontend/src/styles.css
+@@ -1197,7 +1197,7 @@ video {
+   border-color: rgb(191 219 254 / var(--tw-border-opacity, 1));
+ }
+ 
+-.border-emerald-500 {
++.border-blue-500 {
+   --tw-border-opacity: 1;
+   border-color: rgb(16 185 129 / var(--tw-border-opacity, 1));
+ }
+@@ -1265,17 +1265,17 @@ video {
+   background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1));
+ }
+ 
+-.bg-emerald-50 {
++.bg-blue-50 {
+   --tw-bg-opacity: 1;
+   background-color: rgb(236 253 245 / var(--tw-bg-opacity, 1));
+ }
+ 
+-.bg-emerald-600 {
++.bg-blue-600 {
+   --tw-bg-opacity: 1;
+   background-color: rgb(5 150 105 / var(--tw-bg-opacity, 1));
+ }
+ 
+-.bg-emerald-600\/90 {
++.bg-blue-600\/90 {
+   background-color: rgb(5 150 105 / 0.9);
+ }
+ 
+@@ -1298,12 +1298,12 @@ video {
+   background-color: rgb(17 24 39 / 0.6);
+ }
+ 
+-.bg-green-100 {
++.bg-cyan-100 {
+   --tw-bg-opacity: 1;
+   background-color: rgb(220 252 231 / var(--tw-bg-opacity, 1));
+ }
+ 
+-.bg-green-50 {
++.bg-cyan-50 {
+   --tw-bg-opacity: 1;
+   background-color: rgb(240 253 244 / var(--tw-bg-opacity, 1));
+ }
+@@ -1349,7 +1349,7 @@ video {
+   background-image: linear-gradient(to right, var(--tw-gradient-stops));
+ }
+ 
+-.from-emerald-400 {
++.from-cyan-400 {
+   --tw-gradient-from: #34d399 var(--tw-gradient-from-position);
+   --tw-gradient-to: rgb(52 211 153 / 0) var(--tw-gradient-to-position);
+   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+@@ -1361,9 +1361,9 @@ video {
+   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+ }
+ 
+-.via-emerald-600 {
++.via-blue-600 {
+   --tw-gradient-to: rgb(5 150 105 / 0)  var(--tw-gradient-to-position);
+-  --tw-gradient-stops: var(--tw-gradient-from), #059669 var(--tw-gradient-via-position), var(--tw-gradient-to);
++  --tw-gradient-stops: var(--tw-gradient-from), #2563eb var(--tw-gradient-via-position), var(--tw-gradient-to);
+ }
+ 
+ .to-gray-100 {
+@@ -1374,8 +1374,8 @@ video {
+   --tw-gradient-to: #f9fafb var(--tw-gradient-to-position);
+ }
+ 
+-.to-green-500 {
+-  --tw-gradient-to: #22c55e var(--tw-gradient-to-position);
++.to-cyan-500 {
++  --tw-gradient-to: #06b6d4 var(--tw-gradient-to-position);
+ }
+ 
+ .bg-cover {
+@@ -1675,7 +1675,7 @@ video {
+   color: rgb(37 99 235 / var(--tw-text-opacity, 1));
+ }
+ 
+-.text-emerald-600 {
++.text-blue-600 {
+   --tw-text-opacity: 1;
+   color: rgb(5 150 105 / var(--tw-text-opacity, 1));
+ }
+@@ -1715,7 +1715,7 @@ video {
+   color: rgb(31 41 55 / var(--tw-text-opacity, 1));
+ }
+ 
+-.text-green-600 {
++.text-cyan-600 {
+   --tw-text-opacity: 1;
+   color: rgb(22 163 74 / var(--tw-text-opacity, 1));
+ }
+@@ -1831,7 +1831,7 @@ video {
+   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+ }
+ 
+-.shadow-emerald-600\/30 {
++.shadow-blue-600\/30 {
+   --tw-shadow-color: rgb(5 150 105 / 0.3);
+   --tw-shadow: var(--tw-shadow-colored);
+ }
+@@ -1964,7 +1964,7 @@ video {
+   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+ }
+ 
+-.hover\:border-emerald-300:hover {
++.hover\:border-blue-300:hover {
+   --tw-border-opacity: 1;
+   border-color: rgb(110 231 183 / var(--tw-border-opacity, 1));
+ }
+@@ -1988,12 +1988,12 @@ video {
+   background-color: rgb(29 78 216 / var(--tw-bg-opacity, 1));
+ }
+ 
+-.hover\:bg-emerald-50:hover {
++.hover\:bg-blue-50:hover {
+   --tw-bg-opacity: 1;
+   background-color: rgb(236 253 245 / var(--tw-bg-opacity, 1));
+ }
+ 
+-.hover\:bg-emerald-500:hover {
++.hover\:bg-blue-500:hover {
+   --tw-bg-opacity: 1;
+   background-color: rgb(16 185 129 / var(--tw-bg-opacity, 1));
+ }
+@@ -2028,7 +2028,7 @@ video {
+   color: rgb(37 99 235 / var(--tw-text-opacity, 1));
+ }
+ 
+-.hover\:text-emerald-600:hover {
++.hover\:text-blue-600:hover {
+   --tw-text-opacity: 1;
+   color: rgb(5 150 105 / var(--tw-text-opacity, 1));
+ }
+@@ -2081,7 +2081,7 @@ video {
+   --tw-shadow: var(--tw-shadow-colored);
+ }
+ 
+-.focus\:border-emerald-500:focus {
++.focus\:border-blue-500:focus {
+   --tw-border-opacity: 1;
+   border-color: rgb(16 185 129 / var(--tw-border-opacity, 1));
+ }
+@@ -2102,7 +2102,7 @@ video {
+   --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity, 1));
+ }
+ 
+-.focus\:ring-emerald-500:focus {
++.focus\:ring-blue-500:focus {
+   --tw-ring-opacity: 1;
+   --tw-ring-color: rgb(16 185 129 / var(--tw-ring-opacity, 1));
+ }
+@@ -2136,7 +2136,7 @@ video {
+   border-color: rgb(147 197 253 / var(--tw-border-opacity, 1));
+ }
+ 
+-.group:hover .group-hover\:text-emerald-400 {
++.group:hover .group-hover\:text-cyan-400 {
+   --tw-text-opacity: 1;
+   color: rgb(52 211 153 / var(--tw-text-opacity, 1));
+ }
+@@ -2247,3 +2247,4 @@ video {
+     display: none;
+   }
+ }
++

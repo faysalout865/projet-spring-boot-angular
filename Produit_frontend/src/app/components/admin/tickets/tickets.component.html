@@ -1,0 +1,53 @@
+<div class="space-y-6 animate-in fade-in duration-500 relative z-10">
+  <!-- Header -->
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white border border-gray-200 p-6 rounded-2xl shadow-sm relative overflow-hidden">
+    <div class="absolute -right-10 -top-10 w-48 h-48 bg-blue-50 blur-3xl rounded-full"></div>
+    <div class="relative z-10">
+      <h2 class="text-2xl font-black text-gray-800 mb-1 tracking-wider uppercase">
+        <i class="fas fa-receipt text-blue-600 mr-2"></i>
+        Historique des Achats
+      </h2>
+      <p class="text-gray-500 text-xs font-bold uppercase tracking-widest">Consultez les tickets de caisse</p>
+    </div>
+  </div>
+
+  <!-- Tickets List -->
+  <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden relative z-10">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-gray-50/50 border-b border-gray-200">
+            <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-widest">N° Ticket</th>
+            <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-widest">Date & Heure</th>
+            <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-widest text-right">Montant Total</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          <tr *ngIf="isLoading">
+            <td colspan="3" class="px-6 py-12 text-center text-gray-400 font-medium">
+              <i class="fas fa-circle-notch fa-spin text-3xl mb-4 text-gray-300"></i>
+              <p>Chargement de l'historique...</p>
+            </td>
+          </tr>
+          <tr *ngIf="!isLoading && tickets.length === 0">
+            <td colspan="3" class="px-6 py-12 text-center text-gray-400 font-medium">
+              <i class="fas fa-receipt text-3xl mb-4 text-gray-300"></i>
+              <p>Aucun achat n'a été enregistré.</p>
+            </td>
+          </tr>
+          <tr *ngFor="let t of tickets" class="hover:bg-blue-50/30 transition-colors group">
+            <td class="px-6 py-4 font-bold text-gray-800 tracking-wide">
+              #{{ t.idTicket }}
+            </td>
+            <td class="px-6 py-4 text-gray-500 font-medium">
+              {{ t.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}
+            </td>
+            <td class="px-6 py-4 text-right font-black text-blue-600">
+              {{ t.totalAmount | number:'1.2-2' }} DH
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

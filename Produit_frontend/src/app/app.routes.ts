@@ -5,6 +5,7 @@ import { AdminLayoutComponent } from './components/admin/admin-layout/admin-layo
 import { InventoryComponent } from './components/admin/inventory/inventory.component';
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { UsersComponent } from './components/admin/users/users.component';
+import { TicketsComponent } from './components/admin/tickets/tickets.component';
 import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -18,6 +19,7 @@ export const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'inventory', component: InventoryComponent },
       { path: 'users', component: UsersComponent },
+      { path: 'tickets', component: TicketsComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
