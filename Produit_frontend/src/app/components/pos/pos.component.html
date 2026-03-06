@@ -45,7 +45,7 @@
     <!-- Supermarket Shelf Cubes -->
     <div class="flex-1 overflow-y-auto p-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 auto-rows-max pb-24">
       
-      <div *ngFor="let p of produits" class="group relative flex flex-col h-64 bg-white border border-gray-200 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-emerald-900/10 cursor-pointer overflow-hidden" (click)="addToCart(p)">
+      <div *ngFor="let p of produits" class="group relative flex flex-col h-64 bg-white border border-gray-200 rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-900/10 cursor-pointer overflow-hidden" (click)="addToCart(p)">
          
         <div class="w-full h-40 relative bg-gray-50 flex items-center justify-center p-2">
           <img *ngIf="p.imageUrl" [src]="p.imageUrl" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&q=80'" alt="Product" class="w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-700">
@@ -92,7 +92,7 @@
 
       <div *ngFor="let item of cart" class="flex items-center justify-between p-3 bg-white rounded-xl border border-gray-200 hover:border-blue-300 transition-colors group shadow-sm">
         <div class="flex-1">
-          <p class="font-bold text-sm text-gray-700 line-clamp-1 group-hover:text-emerald-700 transition-colors">{{ item.nomProduit }}</p>
+          <p class="font-bold text-sm text-gray-700 line-clamp-1 group-hover:text-blue-700 transition-colors">{{ item.nomProduit }}</p>
           <p class="text-xs font-black text-blue-600 mt-1">{{ item.prixProduit | number:'1.2-2' }} DH</p>
         </div>
         <div class="flex items-center space-x-2 bg-gray-50 rounded-lg p-1 ml-4 border border-gray-200">
